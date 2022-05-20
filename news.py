@@ -3,11 +3,14 @@ from pprint import pprint
 from newsapi.newsapi_client import NewsApiClient
 from googletrans import Translator
 
+from config import news_key
+
+
 def news(q,i):
     if q=="Дощ" or q=="дощ" or q=="rain" or q=="Rain":
         raise Exception
     translator = Translator()
-    newsapi = NewsApiClient(api_key="e9b6e421ccb44bad912783bcd8800b43")
+    newsapi = NewsApiClient(api_key=f"{news_key}")
     if "lang=en" in (str(translator.detect(q))):
         newss = translator.translate(q,src="en",dest="en").text
         data_2 = newsapi.get_top_headlines(q=f"{newss}")

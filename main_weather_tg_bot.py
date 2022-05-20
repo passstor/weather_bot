@@ -1,10 +1,12 @@
 import requests
 import datetime
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.dispatcher.filters import state
-from aiogram.dispatcher.filters.state import StatesGroup, State
 
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+
+from aiogram.types import  ReplyKeyboardRemove
+
+from markup_bot import markup_all, markup, markup_news, markup_first, markup_y_n, markup_news_next_back, markup_6, \
+    markup_2
 from news import news
 from clas import City
 from excel import excell, excell_more_days,excell_news
@@ -17,135 +19,7 @@ bot = Bot(token=tg_bot_token)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
-markup_all = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Новини")
-        ],
-        [
-            KeyboardButton(text="Погода")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup_y_n = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="так")
-        ],
-        [
-            KeyboardButton(text="ні")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup_news = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Новини за запитом")
-        ],
-        [
-            KeyboardButton(text="Звіт всіх новин за запитом")
-        ],
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup_news_next_back = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Наступна новина")
-        ],
-        [
-            KeyboardButton(text="Минула новина")
-        ],
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Погода зараз")
-        ],
-        [
-            KeyboardButton(text="Прогноз погоди")
-        ],
-        [
-            KeyboardButton(text="Відправити звіт")
-        ],
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup_first = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Погода зараз")
-        ],
-        [
-            KeyboardButton(text="Прогноз погоди")
-        ],
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup_3 = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Погода зараз")
-        ],
-        [
-            KeyboardButton(text="Прогноз погоди")
-        ],
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup_6 = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Погода зараз")
-        ],
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
-markup_back = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
 
-markup_2 = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Прогноз погоди")
-        ],
-        [
-            KeyboardButton(text="Відправити звіт")
-        ],
-        [
-            KeyboardButton(text="Назад")
-        ]
-    ],
-    resize_keyboard=True
-)
 
 
 @dp.message_handler(commands=["start"])

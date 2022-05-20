@@ -1,11 +1,6 @@
 from datetime import datetime
-
 import openpyxl
-import requests
 from googletrans import Translator
-
-from config import open_weather_token
-from news import news
 
 
 def excell(data):
