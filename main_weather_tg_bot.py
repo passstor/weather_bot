@@ -287,13 +287,7 @@ async def city_town_days(message: types.Message, state: FSMContext):
 @dp.message_handler(state=City.town_1)
 async def get_weather(message: types.Message, state: FSMContext):
     code_to_smile = {
-        "Clear": "Ясно \U00002600",
-        "Clouds": "Хмарно \U00002601",
-        "Rain": "Дощ \U00002614",
-        "Drizzle": "Дош \U00002614",
-        "Thunderstorm": "Гроза \U000026A1",
-        "Snow": "Сніг \U0001F328",
-        "Mist": "Туман \U0001F32B"
+        "Clear": "Ясно \U00002600","Clouds": "Хмарно \U00002601","Rain": "Дощ \U00002614","Drizzle": "Дрібний дощ \U00002614","Thunderstorm": "Гроза \U000026A1","Snow": "Сніг \U0001F328","Mist": "Туман \U0001F32B"
     }
     try:
         try:
@@ -333,7 +327,7 @@ async def get_weather(message: types.Message, state: FSMContext):
                             if weather_description in code_to_smile:
                                 wd = code_to_smile[weather_description]
                             else:
-                                wd = "Подивись в вікно,не розумію що там за погода"
+                                wd = "Не зрозуміла погода"
 
                             humidity = data["main"]["humidity"]
                             pressure = data["main"]["pressure"]
@@ -343,10 +337,9 @@ async def get_weather(message: types.Message, state: FSMContext):
                             length_of_the_day = datetime.datetime.fromtimestamp(
                                 data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(
                                 data["sys"]["sunrise"])
-                            await message.answer(f"***{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\n"
-                                                 f"Погода в місті: {city}\nТемпература: {cur_weather}C° {wd}\n"
-                                                 f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\n"
-                                                 f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\nТривалість дня: {length_of_the_day}\n "
+                            await message.answer(f"Погода в місті: {city}\n***Станом на {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\nТемпература: {cur_weather}C° {wd}\n"
+                                                 f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\nТривалість дня: {length_of_the_day}\n"
+                                                 f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\n "
                                                  f"Хорошого дня!", reply_markup=markup_2)
                             await City.town_1.set()
                     break
@@ -367,7 +360,7 @@ async def get_weather(message: types.Message, state: FSMContext):
                             if weather_description in code_to_smile:
                                 wd = code_to_smile[weather_description]
                             else:
-                                wd = "Подивись в вікно,не розумію що там за погода"
+                                wd = "Не зрозуміла погода"
 
                             humidity = data["main"]["humidity"]
                             pressure = data["main"]["pressure"]
@@ -377,10 +370,9 @@ async def get_weather(message: types.Message, state: FSMContext):
                             length_of_the_day = datetime.datetime.fromtimestamp(
                                 data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(
                                 data["sys"]["sunrise"])
-                            await message.answer(f"***{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\n"
-                                                 f"Погода в місті: {city}\nТемпература: {cur_weather}C° {wd}\n"
-                                                 f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\n"
-                                                 f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\nТривалість дня: {length_of_the_day}\n "
+                            await message.answer(f"Погода в місті: {city}\n***Станом на {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\nТемпература: {cur_weather}C° {wd}\n"
+                                                 f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\nТривалість дня: {length_of_the_day}\n"
+                                                 f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\n "
                                                  f"Хорошого дня!", reply_markup=markup_2)
                             await City.town_1.set()
                     break
@@ -398,7 +390,7 @@ async def get_weather(message: types.Message, state: FSMContext):
                 if weather_description in code_to_smile:
                     wd = code_to_smile[weather_description]
                 else:
-                    wd = "Подивись в вікно,не розумію що там за погода"
+                    wd = "Не зрозуміла погода"
 
                 humidity = data["main"]["humidity"]
                 pressure = data["main"]["pressure"]
@@ -408,11 +400,10 @@ async def get_weather(message: types.Message, state: FSMContext):
                 length_of_the_day = datetime.datetime.fromtimestamp(
                     data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(
                     data["sys"]["sunrise"])
-                await message.reply(f"***{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\n"
-                                    f"Погода в місті: {city}\nТемпература: {cur_weather}C° {wd}\n"
-                                    f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\n"
-                                    f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\nТривалість дня: {length_of_the_day}\n "
-                                    f"Хорошого дня!", reply_markup=markup_2)
+                await message.answer(f"Погода в місті: {city}\n***Станом на {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\nТемпература: {cur_weather}C° {wd}\n"
+                                                 f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\nТривалість дня: {length_of_the_day}\n"
+                                                 f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\n "
+                                                 f"Хорошого дня!", reply_markup=markup_2)
                 await City.town_1.set()
 
 
@@ -460,7 +451,7 @@ async def get_weather(message: types.Message, state: FSMContext):
                 if weather_description in code_to_smile:
                     wd = code_to_smile[weather_description]
                 else:
-                    wd = "Подивись в вікно,не розумію що там за погода"
+                    wd = "Не зрозуміла погода"
 
                 humidity = data["main"]["humidity"]
                 pressure = data["main"]["pressure"]
@@ -471,12 +462,10 @@ async def get_weather(message: types.Message, state: FSMContext):
                     data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(
                     data["sys"]["sunrise"])
 
-                await message.reply(f"***{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\n"
-                                    f"Погода в місті: {city}\nТемпература: {cur_weather}C° {wd}\n"
-                                    f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\n"
-                                    f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\nТривалість "
-                                    f"дня: {length_of_the_day}\n "
-                                    f"Хорошого дня!", reply_markup=markup_2)
+                await message.answer(f"Погода в місті: {city}\n***Станом на {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\nТемпература: {cur_weather}C° {wd}\n"
+                                                 f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\nТривалість дня: {length_of_the_day}\n"
+                                                 f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\n "
+                                                 f"Хорошого дня!", reply_markup=markup_2)
                 await City.town_1.set()
 
 
