@@ -67,6 +67,21 @@ markup = ReplyKeyboardMarkup(
     ],
     resize_keyboard=True
 )
+markup_zvit = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Погода зараз")
+        ],
+        [
+            KeyboardButton(text="Прогноз погоди")
+        ],
+        [
+            KeyboardButton(text="Назад")
+        ]
+    ],
+    resize_keyboard=True
+)
+
 markup_first = ReplyKeyboardMarkup(
     keyboard=[
         [

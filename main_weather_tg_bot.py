@@ -179,7 +179,7 @@ async def get_weather(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state=City.zvit)
 async def zvit(message: types.Message, state: FSMContext):
-    await message.answer(f"Ваш звіт по місту", reply_markup=markup)
+    await message.answer(f"Ваш звіт по місту", reply_markup=markup_first)
     await message.answer_document(open('Report.xlsx', 'rb'))
 
 @dp.message_handler(state=City.town_2)
@@ -422,7 +422,7 @@ async def get_weather(message: types.Message, state: FSMContext):
                 await message.answer("Виберіть дію")
             elif town_1 =="Відправити звіт":
                 await state.reset_state()
-                await message.answer(f"Ваш звіт по місту", reply_markup=markup)
+                await message.answer(f"Ваш звіт по місту", reply_markup=markup_first)
                 await message.answer_document(open('Report.xlsx', 'rb'))
             elif town_1=="/start":
                 await state.reset_state()
@@ -478,7 +478,7 @@ async def get_weather(message: types.Message, state: FSMContext):
             await state.reset_state()
             await City.town_2.set()
         elif town_1=="Відправити звіт":
-            await message.answer(f"Ваш звіт по місту", reply_markup=markup)
+            await message.answer(f"Ваш звіт по місту", reply_markup=markup_first)
             await message.answer_document(open('Report.xlsx', 'rb'))
         elif town_1=="/start":
             await state.reset_state()
