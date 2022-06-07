@@ -7,6 +7,43 @@ markup_all = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Погода")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
+        ]
+    ],
+    resize_keyboard=True
+)
+markup_acc = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Видалити акаунт")
+        ],
+        [
+            KeyboardButton(text="Зареєструватися")
+        ],
+        [
+            KeyboardButton(text="До розділів")
+        ],
+    ],
+    resize_keyboard=True
+)
+markup_reg = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Зареєструватися")
+        ]
+
+    ],
+    resize_keyboard=True
+)
+markup_start = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Зареєструватися")
+        ],
+        [
+            KeyboardButton(text="Продовжити без реєстрації")
         ]
     ],
     resize_keyboard=True
@@ -14,7 +51,7 @@ markup_all = ReplyKeyboardMarkup(
 markup_y_n = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="так")
+                KeyboardButton(text="так")
         ],
         [
             KeyboardButton(text="ні")
@@ -32,6 +69,9 @@ markup_news = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True
@@ -46,6 +86,9 @@ markup_news_next_back = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True
@@ -63,6 +106,9 @@ markup = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True
@@ -77,6 +123,9 @@ markup_zvit = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True
@@ -92,6 +141,9 @@ markup_first = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True
@@ -106,6 +158,9 @@ markup_3 = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True
@@ -117,6 +172,9 @@ markup_6 = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True
@@ -124,7 +182,7 @@ markup_6 = ReplyKeyboardMarkup(
 markup_back = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="Назад")
+            KeyboardButton(text="Відхилити")
         ]
     ],
     resize_keyboard=True
@@ -140,6 +198,9 @@ markup_2 = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Назад")
+        ],
+        [
+            KeyboardButton(text="До керування акаунтом")
         ]
     ],
     resize_keyboard=True

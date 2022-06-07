@@ -1,6 +1,8 @@
 from datetime import datetime
 from pprint import pprint
 
+from psycopg2.extras import RealDictCursor, execute_values
+from validate_email import validate_email
 import openpyxl
 import requests
 
@@ -34,31 +36,22 @@ def excell(data):
     book.save("Reports.xlsx")
     book.close()
 #excell()
-city="Київ"
-q = requests.get(
-    f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid={open_weather_token}&units=metric"
-)
-data_1 = q.json()
-lat = data_1[0]['lat']
-lon = data_1[0]['lon']
 
-def func_1():
-    title = "Bimbas"
-    description = "8 let"
-    author = "Maksim"
-
-    a = {
-        "title": f'{title}',
-        "description": f'{description}',
-        "author": f'{author}'
-    }
-    return a
-dic=func_1()
-print(dic["description"])
-
-
-
-
+# login = "nazar08032003@mail.com"
+# is_valid = validate_email(login, verify=True)
+# print(is_valid)
+y=datetime.now().strftime('%Y')
+m=datetime.now().strftime('%m')
+d=datetime.now().strftime('%d')
+a=datetime.now().strftime('%Y-%m-%d')
+print(a[0:4])#рік
+print(a[5:7]) #місяць
+print(a[8:10]) #день
+if update(message.from_user.id):
+    pass  # всьо гуд
+else:
+    await City.block.set()
+#print(y,m,d)
 
 
 

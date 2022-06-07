@@ -120,3 +120,4 @@ def excell_news(data,news):
         row += 1
     book.save("Report_news.xlsx")
     book.close()
+
