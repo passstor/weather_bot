@@ -43,14 +43,12 @@ def excell(data):
 y=datetime.now().strftime('%Y')
 m=datetime.now().strftime('%m')
 d=datetime.now().strftime('%d')
-a=datetime.now().strftime('%Y-%m-%d')
+a=datetime.now().strftime('%Y-%m-%d %H:%M')
 print(a[0:4])#рік
 print(a[5:7]) #місяць
 print(a[8:10]) #день
-if update(message.from_user.id):
-    pass  # всьо гуд
-else:
-    await City.block.set()
+print(a[11:13]) #година
+print(a[14:16]) #хвилини
 #print(y,m,d)
 
 

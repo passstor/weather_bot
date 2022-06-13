@@ -6,7 +6,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.types import  ReplyKeyboardRemove
 from validate_email import validate_email
 
-from sql import delete,add,update,sign,check,give,check_unsign
+from sql import delete,add,update,sign,check,give,check_unsign,update_try
 from markup_bot import markup_all, markup, markup_news, markup_first, markup_y_n, markup_news_next_back, markup_6, \
     markup_2,markup_start,markup_back,markup_acc,markup_reg
 from news import news
@@ -39,6 +39,7 @@ async def start_command(message: types.Message):
     await message.reply("Привіт! Виберіть певний розділ\n", reply_markup=markup_all)
 @dp.message_handler(text=["Зареєструватися"])
 async def start_command(message: types.Message):
+    update_try()
     if (check(message.from_user.id)):
         await message.reply("Напишіть ім'я, під яким будете зареєстровані\n", reply_markup=markup_back)
         await City.name.set()
@@ -55,43 +56,54 @@ async def start_command(message: types.Message):
             await City.name.set()
 @dp.message_handler(text=["Відправити звіт"])
 async def zvit(message: types.Message):
+    update_try()
     await message.answer(f"Ваш звіт по місту", reply_markup=markup)
     await message.answer_document(open('Report.xlsx', 'rb'))
 @dp.message_handler(text=["Новини"])
 async def zvit(message: types.Message):
+    update_try()
     await message.answer(f"Виберіть дію з новинами", reply_markup=markup_news)
 @dp.message_handler(text=["Погода"])
 async def zvit(message: types.Message):
+    update_try()
     await message.answer(f"Виберіть дію з погодою", reply_markup=markup_first)
 
 @dp.message_handler(text=["Погода зараз"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Напишіть місто", reply_markup=ReplyKeyboardRemove())
     await City.town_1.set()
 
 @dp.message_handler(text=["Назад"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Виберіть дію", reply_markup=markup_all)
 @dp.message_handler(text=["Відхилити"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Виберіть дію", reply_markup=markup_start)
 @dp.message_handler(text=["До керування акаунтом"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Виберіть дію", reply_markup=markup_acc)
 @dp.message_handler(text=["Видалити акаунт"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Введіть ім'я акаунту", reply_markup=markup_back)
     await City.name_delete.set()
 @dp.message_handler(text=["Прогноз погоди"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Напишіть місто", reply_markup=ReplyKeyboardRemove())
     await City.town_2.set()
 @dp.message_handler(text=["Новини за запитом"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Напишіть запит для новин", reply_markup=ReplyKeyboardRemove())
     await City.new.set()
 @dp.message_handler(text=["Звіт всіх новин за запитом"])
 async def start_command(message: types.Message):
+    update_try()
     await message.answer("Напишіть запит для новин", reply_markup=ReplyKeyboardRemove())
     await City.news_zvit.set()
 
@@ -102,8 +114,20 @@ async def block(message: types.Message, state: FSMContext):
     block=data.get("block")
     if block=="Зареєструватися":
         await state.reset_state()
-        await message.answer("Напишіть ім'я для реєстрації",reply_markup=markup_back)
-        await City.name.set()
+        if (check(message.from_user.id)):
+            await message.reply("Напишіть ім'я, під яким будете зареєстровані\n", reply_markup=markup_back)
+            await City.name.set()
+        else:
+            a = give(message.from_user.id)
+            try:
+                acc_name = a["user_name"]
+                acc_login = a["user_login"]
+                await message.answer(f"Ваш акаунт уже зареєстрований\n"
+                                     f"Ім'я акаунту {acc_name}\n"
+                                     f"Логін {acc_login}", reply_markup=markup_all)
+            except:
+                await message.reply("Напишіть ім'я, під яким будете зареєстровані\n", reply_markup=markup_back)
+                await City.name.set()
     else:
         await message.reply("В закінчились доступні запити!!!",reply_markup=markup_reg)
         await City.block.set()

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import psycopg2
 from psycopg2.extras import RealDictCursor, execute_values
 
@@ -71,6 +73,9 @@ def delete(user_name,user_password):
                                     DELETE FROM bot
                                     WHERE user_name='{user_name}'
                                  """)
+                    return 0
+            raise Exception
+
 def update(user_id):
     try:
         with psycopg2.connect(dbname="bot", user="postgres", password="yfpfh2003") as conn:
@@ -84,7 +89,7 @@ def update(user_id):
                         if i["user_name"]:
                             pass
                         else:
-                            if int(i["updates"]) >= 7:
+                            if int(i["updates"]) >= 5:
                                 raise Exception
                             else:
                                 value = int(i["updates"]) + 1
@@ -97,5 +102,26 @@ def update(user_id):
 
     except:
         return None
-
- # if i["user_id"]==f"{user_id}":
+def update_try():
+        with psycopg2.connect(dbname="bot", user="postgres", password="yfpfh2003") as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as curs:
+                a = datetime.now().strftime('%Y-%m-%d')
+                day=a[8:10]
+                year=a[0:4]
+                month=a[5:7]
+                curs.execute("SELECT * FROM updates")
+                record = curs.fetchall()
+                if record[0]["year"]!=f"{year}" or record[0]["month"]!=f"{month}" or record[0]["day"]!=f"{day}":
+                    curs.execute(f"""
+                                                                                                       UPDATE updates
+                                                                                                       SET year = %s, month = %s, day = %s
+                                                                                                           """, (year,month,day))
+                    second_update()
+def second_update():
+    with psycopg2.connect(dbname="bot", user="postgres", password="yfpfh2003") as conn:
+        with conn.cursor(cursor_factory=RealDictCursor) as curs:
+            curs.execute("SELECT * FROM bot")
+            curs.execute(f"""
+                                                                                   UPDATE bot
+                                                                                   SET updates = %s
+                                                                                       """, (0,))
